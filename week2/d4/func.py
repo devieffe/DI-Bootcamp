@@ -69,9 +69,9 @@ def show_magicians(magicians = magician_names):
 
 show_magicians()
 
-def make_great(great):
-    for name in great:
-        return print('Great ' + name)
+def make_great(names):
+    for great in names:
+        return print('Great ' + great)
 
 make_great(magician_names)        
 
@@ -185,3 +185,65 @@ data = [
         "answer": "Wookiee"
     }
 ]
+
+def take_quiz(questions):
+    correct_answers = 0
+    incorrect_answers = 0
+    wrong_answers = []
+
+    for question_data in questions:
+        question = question_data["question"]
+        correct_answer = question_data["answer"]
+        user_answer = input(question + ": ").strip()
+
+        if user_answer.lower() == correct_answer.lower():
+            print("Correct!")
+            correct_answers += 1
+        else:
+            print("Incorrect!")
+            incorrect_answers += 1
+            wrong_answers.append({"question": question, "user_answer": user_answer, "correct_answer": correct_answer})
+
+    return correct_answers, incorrect_answers, wrong_answers
+
+
+def display_results(correct_answers, incorrect_answers, wrong_answers):
+    print("\nQuiz Results:")
+    print("Correct answers:", correct_answers)
+    print("Incorrect answers:", incorrect_answers)
+
+    if incorrect_answers > 0:
+        print("\nWrong Answers:")
+        for wrong_answer in wrong_answers:
+            print("Question:", wrong_answer["question"])
+            print("Your Answer:", wrong_answer["user_answer"])
+            print("Correct Answer:", wrong_answer["correct_answer"])
+            print()
+
+    if incorrect_answers > 3:
+        print("You had more than 3 wrong answers. Please play again.")
+        return False
+    else:
+        return True
+
+
+def main():
+    data = [
+        {"question": "What is Baby Yoda's real name?", "answer": "Grogu"},
+        {"question": "Where did Obi-Wan take Luke after his birth?", "answer": "Tatooine"},
+        {"question": "What year did the first Star Wars movie come out?", "answer": "1977"},
+        {"question": "Who built C-3PO?", "answer": "Anakin Skywalker"},
+        {"question": "Anakin Skywalker grew up to be who?", "answer": "Darth Vader"},
+        {"question": "What species is Chewbacca?", "answer": "Wookiee"}
+    ]
+
+    correct_answers, incorrect_answers, wrong_answers = take_quiz(data)
+    play_again = display_results(correct_answers, incorrect_answers, wrong_answers)
+
+    while not play_again:
+        correct_answers, incorrect_answers, wrong_answers = take_quiz(data)
+        play_again = display_results(correct_answers, incorrect_answers, wrong_answers)
+
+
+if __name__ == "__main__":
+    main()
