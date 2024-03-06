@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Flexbox study</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <style>
+    .e1,.e2,.e3,.e4 {
+        border: 2px solid Red;
+        padding: 3px;
+        height: 300px;
+        margin-bottom: 100px;
+        display: flex;
+        flex-direction: column;
+    }
+    .e1 {
+        align-content: center;
+        justify-content: space-between;
+        .box1, .box2, .box3 {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        } 
+        .box2 {
+            flex: 3;
+            width: 60%;
+            height: 50px;
+            align-self: center;
+        }
+    }
+    div {
+        > div {
+            background-color: LightBlue;
+            margin: 2px;
+            font: bold 3em sans-serif;
+            color: white;
+        }
+    }
+  </style>  
+</head>
+<body>
+  <header>
+    <h1>Flexbox study</h1> 
+  </header>
+  <main>
+    <div class="e1">
+      <div class="box1">1</div>
+      <div class="box2">2</div>
+      <div class="box3">3</div>
+    </div>
+    <div class="e2">
+      <div class="box1">1</div>
+      <div class="box2">2</div>
+      <div class="box3">3</div>
+    </div>
+    <div class="e3">
+      <div class="box1">1</div>
+      <div class="box2">2</div>
+      <div class="box3">3</div>
+    </div>
+    <div class="e4">
+      <div class="box1">1</div>
+      <div class="box2">2</div>
+      <div class="box3">3</div>
+    </div>         
+  </main>
+  <footer> </footer>
+</body>
+</html>

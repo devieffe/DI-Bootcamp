@@ -1,11 +1,46 @@
+#ex0 Hello, world
+
 my_name = "Dave"
+my_age = "25"
 
-my_age = "40"
-
-print("I'm " + my_name + " and I'm " + my_age + ".")
-
+print("I'm " + my_name + " and I'm " + my_age)
 
 
+
+#ex1
+
+print(int(my_age) + 123879) 
+
+
+
+#ex2
+
+first_name = "dave"
+last_name = "yofi"
+
+print(first_name + " " + last_name)
+
+
+
+#ex3
+
+age = input("How old are you? ")
+
+print(f"You are {age} years old")
+
+
+
+#ex4 ??
+
+num = input("A number from 1 to 100 pls: ")
+
+
+if int(num) % 3 and int(num) % 5 is int:
+    print("FizzBuzz")
+if int(num) % 3 is int:
+    print("Fizz")  
+elif int(num) % 5 is int:
+    print("Buzz")     
 
 
 
@@ -63,9 +98,6 @@ nums = [num for num in range(0,11)]
 
 print(word)
 print(nums)
-
-
-
 
 
 
