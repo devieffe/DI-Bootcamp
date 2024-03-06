@@ -64,18 +64,21 @@ make_shirt()
 
 magician_names = ['Harry Houdini', 'David Blaine', 'Criss Angel']
 
-def show_magicians(magicians = magician_names):
-    print(magicians)
+#def show_magicians(magicians = magician_names):
+#    print(magicians)
+#show_magicians()
 
-show_magicians()
+def show_magicians(magicians):
+    for magician in magicians:
+        print(magician)
 
-def make_great(names):
-    for great in names:
-        return print('Great ' + great)
+show_magicians(magician_names)
 
-make_great(magician_names)        
+def make_great(magicians):
+    for i in range(len(magicians)):
+        print("Great " + magicians[i])        
 
-### why only one name in Greats ??
+make_great(magician_names)
 
 
 
@@ -186,10 +189,10 @@ data = [
     }
 ]
 
-def take_quiz(questions):
-    correct_answers = 0
-    incorrect_answers = 0
-    wrong_answers = []
+def quiz(questions):
+    corrects = 0
+    incorrects = 0
+    wrongs = []
 
     for question_data in questions:
         question = question_data["question"]
@@ -198,36 +201,36 @@ def take_quiz(questions):
 
         if user_answer.lower() == correct_answer.lower():
             print("Correct!")
-            correct_answers += 1
+            corrects += 1
         else:
             print("Incorrect!")
-            incorrect_answers += 1
-            wrong_answers.append({"question": question, "user_answer": user_answer, "correct_answer": correct_answer})
+            incorrects += 1
+            wrongs.append({"question": question, "user_answer": user_answer, "correct_answer": correct_answer})
 
-    return correct_answers, incorrect_answers, wrong_answers
+    return corrects, incorrects, wrongs
 
 
-def display_results(correct_answers, incorrect_answers, wrong_answers):
-    print("\nQuiz Results:")
-    print("Correct answers:", correct_answers)
-    print("Incorrect answers:", incorrect_answers)
+def display_results(corrects, incorrects, wrongs):
+    print("\nSuccess!\nQuiz Results:")
+    print("Correct answers:", corrects)
+    print("Incorrect answers:", incorrects)
 
-    if incorrect_answers > 0:
+    if incorrects > 0:
         print("\nWrong Answers:")
-        for wrong_answer in wrong_answers:
+        for wrong_answer in wrongs:
             print("Question:", wrong_answer["question"])
             print("Your Answer:", wrong_answer["user_answer"])
             print("Correct Answer:", wrong_answer["correct_answer"])
             print()
 
-    if incorrect_answers > 3:
-        print("You had more than 3 wrong answers. Please play again.")
+    if incorrects > 3:
+        print("Fail. You had more than 3 wrong answers. Please play again.")
         return False
     else:
         return True
 
 
-def main():
+def base():
     data = [
         {"question": "What is Baby Yoda's real name?", "answer": "Grogu"},
         {"question": "Where did Obi-Wan take Luke after his birth?", "answer": "Tatooine"},
@@ -237,13 +240,11 @@ def main():
         {"question": "What species is Chewbacca?", "answer": "Wookiee"}
     ]
 
-    correct_answers, incorrect_answers, wrong_answers = take_quiz(data)
-    play_again = display_results(correct_answers, incorrect_answers, wrong_answers)
+    corrects, incorrects, wrongs = quiz(data)
+    play_again = display_results(corrects, incorrects, wrongs)
 
     while not play_again:
-        correct_answers, incorrect_answers, wrong_answers = take_quiz(data)
-        play_again = display_results(correct_answers, incorrect_answers, wrong_answers)
+        corrects, incorrects, wrongs = quiz(data)
+        play_again = display_results(corrects, incorrects, wrongs)
 
-
-if __name__ == "__main__":
-    main()
+base()
