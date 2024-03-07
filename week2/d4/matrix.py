@@ -33,21 +33,19 @@ A = [
     ('^','r','!')
 ]
 
-B = [
-    ('7'),
-    ('T'),
-    ('h'),
-    ('i'),
-    ('s'),
-    ('$'),
-    ('$'),
-    ('#'),
-    ('^')
-]
-print(B)
+print(len(A))
+
+for i in A:
+    x = A[i]
+    print(x)
 
 
+#for i in len(range(A)):
+#    print(A[i])
 
+#x = A[0]
+
+#print(x[0])
 
 #print("A =", A) 
 

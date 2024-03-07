@@ -212,8 +212,8 @@ def quiz(questions):
 
 def display_results(corrects, incorrects, wrongs):
     print("\nSuccess!\nQuiz Results:")
-    print("Correct answers:", corrects)
-    print("Incorrect answers:", incorrects)
+    print("Correct:", corrects)
+    print("Incorrect:", incorrects)
 
     if incorrects > 0:
         print("\nWrong Answers:")

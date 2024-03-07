@@ -1,0 +1,92 @@
+* {
+}
+
+body {
+    padding: 0;
+    max-width: 1600px;
+    margin: 0 auto;
+    border-left: 12px solid White;
+    border-right: 12px solid White;
+    box-shadow: 0 0 50px rgba(0,0,0,.25);
+    font-size: 1.25em;
+}
+
+header {
+
+}
+
+main {
+    .intro {
+        height: 120vh;
+        background: center no-repeat #aaa url('https://raw.githubusercontent.com/palmaflux/palmaflux/main/media/assets/images/49834.jpg');
+        background-size: cover;
+        .info {
+            background-color: rgba(255,255,255,.25);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            form {
+                width: 60%;
+            }
+            & input {
+                display: block;
+                width: 240%
+            }
+        }
+    }
+    .features {     
+        padding: 23vh 0 25vh;   
+        div {
+            text-align: center;
+            .material-symbols-outlined {
+                font-variation-settings:
+                    'FILL' 0,
+                    'wght' 200,
+                    'GRAD' 0,
+                    'opsz' 24
+                }
+            span {
+                font-size: 5em !important;
+            }    
+        }
+    }
+}
+
+
+
+
+@media (max-width: 576px) {
+    header {
+        button {
+            margin-right: 0 !important;
+            margin-bottom: -5px;
+        }
+    }
+    main {
+        .intro {
+            border-radius: 20px;
+            height: 80vh;
+            background-position: left;
+            .info {
+                background-color: transparent;
+                backdrop-filter: none;
+                padding-bottom: 2vh;
+                form {
+                    width: 90%;
+                    flex-direction: column;
+                }
+                input {
+                    display: block;
+                    max-width: 100%;
+                }
+            }
+        }
+        .features {
+            padding: 10vh 0;
+            div {
+                span {
+                    font-size: 4em !important;
+                } 
+            }
+        }
+    }
+}
