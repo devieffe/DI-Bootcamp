@@ -1,4 +1,6 @@
 * {
+    box-sizing: border-box;
+    transition: all .25s linear;
 }
 
 body {
@@ -12,7 +14,9 @@ body {
 }
 
 header {
-
+    button {
+        margin: 0 3px -8px 0;
+    }
 }
 
 main {
@@ -55,7 +59,6 @@ main {
     header {
         button {
             margin-right: 0 !important;
-            margin-bottom: -5px;
         }
     }
     main {
