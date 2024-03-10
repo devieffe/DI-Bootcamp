@@ -21,7 +21,7 @@
 # if/else statements to check the data
 # String for the output of the message
 
-A = [
+A__ = [
     ('7','i','i'),
     ('T','s','x'),
     ('h','%','?'),
@@ -33,11 +33,57 @@ A = [
     ('^','r','!')
 ]
 
-print(len(A))
+A = '''7ii
+Tsx
+h%?
+i #
+sM 
+$a 
+$a 
+#t%
+^r!'''
 
-for i in A:
-    x = A[i]
-    print(x)
+
+COLUMN = 3
+ROWS = 8
+
+rows_str = A.split('\n')
+rows = [rows[1:] for row in rows_str]
+print(rows)
+
+matrix = [list(row) for row in rows]
+
+transposed_matrix = list(zip(*matrix))
+print(transposed_matrix)
+
+print matrix
+
+transposed_message = [''.join(char) for char in transposed_matrix]
+print(transposed_message)
+dec_message = ''
+final_str = dec_message.join(transposed_message)
+
+decrypter_message = ''
+
+char = ''
+
+for chars in final_str:
+    if char.isalpha():
+        decrypter_message += char
+    else:
+        decrypter_message += ' '
+
+print(decrypter_message)
+
+dec_message = ' '.join(decrypter_message.split())
+
+
+
+for i in range(0, len(A), COLUMN):
+    sublist = list(A[i:i+COLUMN])
+    matrix.append(sublist)
+
+print(A)    
 
 
 #for i in len(range(A)):
