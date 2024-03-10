@@ -58,8 +58,9 @@ header {
         line-height: 1.8;
         padding: 1vh 0 5vh;
         i {
-            width: 2em;
+            width: 1.1em;
             text-align: center;
+            margin-right: .35em;
             font-size: 1.1em;
         }
     }
