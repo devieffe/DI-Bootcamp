@@ -80,10 +80,16 @@ main {
     }
 }
 
+
+.container {
+
+}
+
+
 .product {
     position: relative;
     display: inline-block;
-    width: 400px;
+    width: calc(25% - 4px);
     img {
         width: 100%;
         border-radius: 3px;
@@ -113,6 +119,7 @@ main {
             text-transform: uppercase;
             font-weight: bold;
             cursor: pointer;
+            margin-bottom: 50px;
         }
         button:hover {
             color: black;
