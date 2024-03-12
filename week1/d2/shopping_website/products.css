@@ -8,16 +8,13 @@ body {
     line-height: 1.5;
     font-size: 1.2em;
     cursor: default;
-    padding: 0;
-    margin: 0;
+    padding: 0 10px;
 }
 
 header {
-    background: black;
-    color: #fff;
     padding: 20px 10px;
+    border-bottom: 3px solid #000;
     a {
-        color: #fff;
         font-weight: bold;
         text-decoration: none;
     }
@@ -33,36 +30,133 @@ header {
                     margin: 0 .25em;
                     display: inline-block;
                     a {
-                        padding: .5em;
+                        padding: .5em .8em;
                         border-radius: 4px;
                         border: 1px solid transparent;
-                        background-color: red;
+                        background-color: #fff;
+                        color: #000;
                     }
                 }
             }
         }
     }
+    .logo {
+        padding-left: 10px;
+        i {
+            margin-bottom: -30px;
+            font-size: 1.8em;
+        line-height: 0;
+        background-color: red;
+        display: inline-block;
+        }
+    }
     .nav {
-        width: calc(100% - 15px);
+        width: calc(100% - 60px);
         display: inline-block;
         text-align: right;
     }    
 }
 
+.btn1 {
+    background-color: #eee;
+}
+
+.btn2 {
+    background-color: #000;
+    color: #fff;
+}
+
 main {
     padding: 50px;
     min-height: 80vh;
-    div {
-        > div {
-            border: 2px solid black;
-            display: inline-block;
-            width: 20%;
-            border-radius: 20px;
-            height: 400px;
-            margin: 0 30px 30px 0
+    .container {
+        width: auto;
+        margin: 0 auto;
+        max-width: 1600px;
+        div {
+            > div {
+            }
         }    
     }
 }
+
+.product {
+    position: relative;
+    display: inline-block;
+    width: 400px;
+    img {
+        width: 100%;
+        border-radius: 3px;
+    }
+    .p_info {
+        text-align: center;
+        h4 {
+            margin: 0;
+        }
+        p {
+            margin: .5em 0 .8em;
+            span {
+                font-weight: bold;
+                color: orangered;
+            }
+            s {
+                color: #999;
+                font-size: .85em;
+            }
+        }
+        button {
+            padding: 1em 2em;
+            border: 1px solid #999;
+            background-color: white;
+            border-radius: 3px;
+            color: #999;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            color: black;
+            border-color: black;
+        }
+    }
+}
+.new::before {
+    content: 'New';
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: .1em;
+    color: #fff;
+    background: red;
+    z-index: 10;
+}
+
+.sale::after {
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: .1em;
+    color: #fff;
+    background: red;
+    z-index: 10;
+}
+
+.sale10::after {
+    content: '-10%';
+}
+
+.sale20::after {
+    content: '-20%';
+}
+
 
 footer {
     padding: 30px;
