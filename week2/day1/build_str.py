@@ -30,7 +30,6 @@ else:
 print(f'First character: {str[0]}, last character: {str[-1]}')
 
 
-
 for i in range(0, len(str)):
     j = i + 1
     for j in range(0, j):
@@ -42,6 +41,6 @@ import random
 
 len = list(str)
 random.shuffle(len)
-result = ''.join(len)
+res = ''.join(len)
 
-print(result)
+print('Rand: ' + res)
