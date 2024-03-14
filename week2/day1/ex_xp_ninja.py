@@ -42,20 +42,13 @@ print(len(my_text))
 #Keep asking the user to input the longest sentence they can without the character “A”.
 #Each time a user sets a new longest sentence, print a congratulations message.
 
-sen = input('The word without a: ')
+longsen = []
 
-
-
-
-while sen[i] != 'a':
-    i += 1
-
-#for i in range(0, len(sen)):
-#    if sen[i] == 'a':
-#        rec = len(sen)
-#        sen = input('The new sentence without a: ')
-#        i = 0
-#    else:
-#        print("Congratulations " + str(len(sen)))
-
-#print('No a letters ' + str(i))
+while True:
+    sen = input('Longer sentence without a: ')
+    if 'a' not in sen and len(sen) > len(longsen):
+        longsen = sen
+        print('Congratulations')
+    else:
+        print('end.')
+    break
