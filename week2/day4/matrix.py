@@ -21,70 +21,17 @@
 # if/else statements to check the data
 # String for the output of the message
 
-A__ = [
-    ('7','i','i'),
-    ('T','s','x'),
-    ('h','%','?'),
-    ('i',' ','#'),
-    ('s','M',' '),
-    ('$','a',' '),
-    ('$','a',' '),
-    ('#','t','%'),
-    ('^','r','!')
-]
-
-A = '''7ii
-Tsx
-h%?
-i #
-sM 
-$a 
-$a 
-#t%
-^r!'''
-
-
-COLUMN = 3
-ROWS = 8
-
-rows_str = A.split('\n')
-rows = [rows[1:] for row in rows_str]
-print(rows)
-
-matrix = [list(row) for row in rows]
-
-transposed_matrix = list(zip(*matrix))
-print(transposed_matrix)
-
-print matrix
-
-transposed_message = [''.join(char) for char in transposed_matrix]
-print(transposed_message)
-dec_message = ''
-final_str = dec_message.join(transposed_message)
-
-decrypter_message = ''
-
-char = ''
-
-for chars in final_str:
-    if char.isalpha():
-        decrypter_message += char
-    else:
-        decrypter_message += ' '
-
-print(decrypter_message)
-
-dec_message = ' '.join(decrypter_message.split())
-
-
-
-for i in range(0, len(A), COLUMN):
-    sublist = list(A[i:i+COLUMN])
-    matrix.append(sublist)
-
-print(A)    
-
+#A__ = [
+#    ('7','i','i'),
+#    ('T','s','x'),
+#    ('h','%','?'),
+#    ('i',' ','#'),
+#    ('s','M',' '),
+#    ('$','a',' '),
+#    ('$','a',' '),
+#    ('#','t','%'),
+#    ('^','r','!')
+#]
 
 #for i in len(range(A)):
 #    print(A[i])
@@ -111,5 +58,40 @@ print(A)
 #print("3rd column =", column)
 #3rd column = [5, 9, 11]
 
+# Given matrix string
+A_str = """7ii
+Tsx
+h%?
+i #
+sM 
+$a 
+#t%
+^r!"""
 
+rows = A_str.strip().split("\n")
+
+cols = max(len(row) for row in rows)
+
+matrix = [list(row.ljust(cols)) for row in rows]
+
+print(matrix)
+
+row = 0
+col = 0
+
+decrypted_message = ""
+
+for col in range(cols):
+    in_group = False
+    for row in range(len(matrix)):
+        char = matrix[row][col]
+        if char.isalpha():
+            decrypted_message += char
+            in_group = True
+        elif in_group:
+            decrypted_message += " "
+            in_group = False
+
+
+print(f"Message: {decrypted_message}")
 
