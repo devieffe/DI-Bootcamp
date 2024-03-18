@@ -71,15 +71,3 @@ for key in keys_to_remove:
 
 
 print (sample_dict())
-
-
-
-
-
-
-
-#zip
-
-
-
-#ex11
