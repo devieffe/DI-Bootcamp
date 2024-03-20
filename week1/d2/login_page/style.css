@@ -11,3 +11,44 @@ body {
 main {
     
 }
+
+
+.contact-form {
+    background: #eee;
+    width: 600px;
+    border: 1px solid #999;
+    border-radius: 20px;
+    font: normal 1em sans-serif;
+    padding: 60px;
+    backdrop-filter: blur(5px);
+    transition: all .5s linear;
+    > div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        h2, span {
+            margin: 0;
+            font-size: 1.5em;
+            line-height: 1.25;
+        }
+    }
+    label {
+        margin: 1em 0;
+    }
+    input, select, textarea {
+        display: block;
+        font: normal 1.2em sans-serif;
+        padding: .5em;
+        border: 0;
+        width: 100%;
+        border-top: 1px solid rgba(0,0,0,.15);
+        border-radius: 10px;
+    }
+    select {
+        width: 100%;
+    }
+    input:hover, select:hover, textarea:hover {
+        background-color: #f9f9f9;
+    }
+}
