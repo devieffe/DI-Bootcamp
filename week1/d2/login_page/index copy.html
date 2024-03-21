@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>Log in / Sign up</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="contact-form">
+    <div>
+      <h2>Send message</h2>
+      <span>@</span>
+    </div>
+    <form>
+      <label for="name" class="required">Your name</label>
+      <input type="name">
+      <label for="email" class="required">E-mail</label>
+      <input type="email">
+      <label for="tel">Tel.</label>
+      <input type="tel">
+      <label for="company">Company</label>
+      <input type="company">
+      <label for="reason" class="required">Select option:</label>
+      <select id="reason" name="reason" size="1">
+        <option value="volvo">Project</option>
+        <option value="saab">Feedback</option>
+        <option value="fiat">Comments</option>
+        <option value="audi">Say hi</option>
+      </select>
+      <label for="message" class="required">Message:</label>
+      <textarea id="message" rows="8"></textarea>
+      <input type="submit" value="Send">
+    </form>
+  </section>
+</body>
+</html>

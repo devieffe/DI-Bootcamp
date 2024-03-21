@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Accordion</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .accordion {
+            display: none;
+            padding: 10px;
+            margin: 0 0 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .title {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="item">
+        <div class="title">Title 1</div>
+        <div class="accordion active">
+            Content 1
+        </div>
+    </div>
+    
+    <div class="item">
+        <div class="title">Title 2</div>
+        <div class="accordion">
+            Content 2
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.title').click(function() {
+                var accordion = $(this).next('.accordion');
+                $('.accordion').not(accordion).slideUp();
+                accordion.slideToggle();
+            });
+
+            // Expand the first item by default
+            $('.item:first-child .accordion').slideDown(400, function() {
+                $(this).parent().addClass('active');
+            });
+        });
+    </script>
+</body>
+</html>

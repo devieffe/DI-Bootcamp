@@ -22,7 +22,7 @@ main {
     padding: 60px;
     backdrop-filter: blur(5px);
     transition: all .5s linear;
-    .form-header {
+    > div {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -51,27 +51,4 @@ main {
     input:hover, select:hover, textarea:hover {
         background-color: #f9f9f9;
     }
-}
-
-
-
-
-
-.accordion {
-    display: none;
-    padding: 10px;
-    margin: 0 0 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    min-height: 400px;
-}
-
-.active {
-    display: block;
-}
-
-.title {
-    cursor: pointer;
-    padding: 10px;
-    background-color: #eee;
 }

@@ -7,33 +7,87 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <link rel="stylesheet" href="style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+        .accordion {
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion.active {
+            max-height: 200px; /* Set a value larger than the content's height */
+        }
+  </style>
 </head>
 <body>
   <section class="contact-form">
-    <div>
-      <h2>Send message</h2>
-      <span>@</span>
+    <div class="login item active">
+      <div class="form-header title">
+        <h2>Log in</h2>
+        <span>@</span>
+      </div>
+      <div class="accordion">
+        <div class="form">
+          <form>
+            <!-- labels are hidden. there are placeholders. -->
+            <label for="email" class="required">E-mail</label>
+            <input type="email">
+            <label for="password" class="required">Password</label>
+            <input type="password">
+            <input type="submit" value="Log in">
+          </form>
+        </div>
+        <div class="with-services">
+          <h3>Log in with</h3>
+          <button>Google</button>
+          <button>Github</button>
+        </div>
+      </div>
     </div>
-    <form>
-      <label for="name" class="required">Your name</label>
-      <input type="name">
-      <label for="email" class="required">E-mail</label>
-      <input type="email">
-      <label for="tel">Tel.</label>
-      <input type="tel">
-      <label for="company">Company</label>
-      <input type="company">
-      <label for="reason" class="required">Select option:</label>
-      <select id="reason" name="reason" size="1">
-        <option value="volvo">Project</option>
-        <option value="saab">Feedback</option>
-        <option value="fiat">Comments</option>
-        <option value="audi">Say hi</option>
-      </select>
-      <label for="message" class="required">Message:</label>
-      <textarea id="message" rows="8"></textarea>
-      <input type="submit" value="Send">
-    </form>
+    <div class="login item">
+      <div class="form-header title">
+        <h2>Sign up</h2>
+        <span>@</span>
+      </div>
+      <div class="accordion">
+      <div class="form">
+        <form>
+          <label for="name" class="required">Your name</label>
+          <input type="emal">
+          <label for="name" class="required">Your e-mail</label>
+          <input type="emal">
+          <label for="email" class="required">Password:</label>
+          <input type="password">
+          <input type="submit" value="Sign up">
+        </form>
+      </div>
+      <div class="with-services">
+        <h3>Sign up with</h3>
+        <button>Google</button>
+        <button>Github</button>
+      </div>
+      </div>
+    </div>
   </section>
+
+
+
+<script>
+  $(document).ready(function() {
+      $('.title').click(function() {
+          var accordion = $(this).next('.accordion');
+          $('.accordion').not(accordion).slideUp();
+          accordion.slideToggle();
+      });
+
+      // Expand the first item by default
+      $('.item:first-child .accordion').slideDown(400, function() {
+          $(this).parent().addClass('active');
+      });
+  });
+</script>
+
+
 </body>
 </html>
