@@ -1,0 +1,71 @@
+<!--
+Use this Giphy API Random documentation. Use this API Key : hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My
+In the HTML file, add a form, containing an input and a button. 
+This input is used to fetch gif depending on a specific category.
+In the JS file, create a program to fetch one random gif depending on 
+the search of the user (ie. If the search is “sun”, 
+append on the page one gif with a category of “sun”).
+The gif should be appended with a DELETE button next to it. 
+Hint : to find the URL of the gif, look for the sub-object named “images” 
+inside the data you receive from the API.
+Allow the user to delete a specific gif by clicking the DELETE button.
+Allow the user to remove all of the GIFs by clicking a DELETE ALL button.
+-->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giphy API Random GIFs</title>
+</head>
+<body>
+    <h1>Random GIFs with Giphy API</h1>
+    <form id="searchForm">
+        <input type="text" id="searchInput" placeholder="Category">
+        <button type="submit">Search</button>
+    </form>
+    <button id="deleteAllBtn">Delete All</button>
+    <div id="gifContainer"></div>
+
+<script>
+const apiKey = 'hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My';
+const apiUrl = 'https://api.giphy.com/v1/gifs/random';
+
+document.getElementById('searchForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const searchQuery = document.getElementById('searchInput').value;
+    const url = `${apiUrl}?api_key=${apiKey}&tag=${searchQuery}`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        const gifUrl = data.data.images.original.url;
+        appendGif(gifUrl, searchQuery);
+    } catch (error) {
+        console.error('Error fetching GIF:', error);
+    }
+});
+
+document.getElementById('deleteAllBtn').addEventListener('click', () => {
+    const gifContainer = document.getElementById('gifContainer');
+    gifContainer.innerHTML = '';
+});
+
+function appendGif(url, category) {
+    const gifContainer = document.getElementById('gifContainer');
+    const gifElement = document.createElement('div');
+    gifElement.innerHTML = `<img src="${url}" alt="${category}"><button class="deleteBtn">Delete</button>`;
+    gifContainer.appendChild(gifElement);
+    gifElement.querySelector('.deleteBtn').addEventListener('click', () => {
+        gifContainer.removeChild(gifElement);
+    });
+}
+</script>
+</body>
+</html>
