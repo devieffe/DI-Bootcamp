@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+</head>
+<body>
+    <section class="quote-section">
+        <p id="quote-display">Click "Generate Quote" to see a random quote.</p>
+        <button id="generate-quote">Generate Quote</button>
+        <div class="buttons">
+            <button id="char-count">Count Characters (Space Included)</button>
+            <button id="char-count-no-space">Count Characters (Space Not Included)</button>
+            <button id="word-count">Count Words</button>
+            <button id="like-quote">Like</button>
+        </div>
+    </section>
+    <section class="add-quote">
+        <form id="add-quote-form">
+            <label for="quote">Quote:</label>
+            <input type="text" id="quote" name="quote" required>
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
+            <button type="submit">Add Quote</button>
+        </form>
+    </section>
+    <section class="filter-form">
+        <form id="filter-form">
+            <label for="filter-author">Filter by Author:</label>
+            <input type="text" id="filter-author" name="filter-author">
+            <button type="submit">Filter</button>
+        </form>
+        <div class="navigation-buttons">
+            <button id="prev-quote">Previous</button>
+            <button id="next-quote">Next</button>
+        </div>
+    </section>
+
+<script>
+
+const quotes = [
+    { id: 0, author: "Dave Yofi", quote: "Everything's better if there's a photo with rainbow on Facebook.", likes: 0 },
+    { id: 1, author: "Isaac Newton", quote: "If I have seen further it is by standing on the shoulders of Giants.", likes: 0 },
+    { id: 2, author: "Yoda", quote: "Do, or do not. There is no try.", likes: 0 },
+    { id: 3, author: "F. Nietzsche", quote: "Without music, life would be a mistake.", likes: 0 },
+];
+
+let lastQuoteIndex = -1;
+
+function getRandomQuote() {
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * quotes.length);
+    } while (randomIndex === lastQuoteIndex);
+    
+    lastQuoteIndex = randomIndex;
+    return quotes[randomIndex];
+}
+
+document.getElementById('generate-quote').addEventListener('click', () => {
+    const quote = getRandomQuote();
+    document.getElementById('quote-display').textContent = `"${quote.quote}" - ${quote.author}`;
+    currentQuote = quote; // store current quote for later use
+});
+
+document.getElementById('char-count').addEventListener('click', () => {
+    if (currentQuote) {
+        alert(`Character Count (Space Included): ${currentQuote.quote.length}`);
+    }
+});
+
+document.getElementById('char-count-no-space').addEventListener('click', () => {
+    if (currentQuote) {
+        alert(`Character Count (Space Not Included): ${currentQuote.quote.replace(/\s/g, '').length}`);
+    }
+});
+
+document.getElementById('word-count').addEventListener('click', () => {
+    if (currentQuote) {
+        alert(`Word Count: ${currentQuote.quote.split(/\s+/).length}`);
+    }
+});
+
+document.getElementById('like-quote').addEventListener('click', () => {
+    if (currentQuote) {
+        currentQuote.likes += 1;
+        alert(`Likes: ${currentQuote.likes}`);
+    }
+});
+
+// Part 2: Adding Quotes
+document.getElementById('add-quote-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const quoteText = document.getElementById('quote').value;
+    const authorName = document.getElementById('author').value;
+    const newId = quotes.length > 0 ? quotes[quotes.length - 1].id + 1 : 0;
+    quotes.push({ id: newId, author: authorName, quote: quoteText, likes: 0 });
+    document.getElementById('quote').value = '';
+    document.getElementById('author').value = '';
+});
+
+// Part 3: Filtering Quotes by Author
+document.getElementById('filter-form').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const authorName = document.getElementById('filter-author').value.toLowerCase();
+    filteredQuotes = quotes.filter(q => q.author.toLowerCase() === authorName);
+    currentFilterIndex = 0;
+    if (filteredQuotes.length > 0) {
+        displayQuote(filteredQuotes[currentFilterIndex]);
+    }
+});
+
+function displayQuote(quote) {
+    document.getElementById('quote-display').textContent = `"${quote.quote}" - ${quote.author}`;
+}
+
+document.getElementById('prev-quote').addEventListener('click', () => {
+    if (filteredQuotes && filteredQuotes.length > 0) {
+        currentFilterIndex = (currentFilterIndex - 1 + filteredQuotes.length) % filteredQuotes.length;
+        displayQuote(filteredQuotes[currentFilterIndex]);
+    }
+});
+
+document.getElementById('next-quote').addEventListener('click', () => {
+    if (filteredQuotes && filteredQuotes.length > 0) {
+        currentFilterIndex = (currentFilterIndex + 1) % filteredQuotes.length;
+        displayQuote(filteredQuotes[currentFilterIndex]);
+    }
+});
+</script>
+</body>
+</html>

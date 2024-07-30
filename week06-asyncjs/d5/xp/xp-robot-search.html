@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robo-Friends</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 20px;
+    background-color: #282c34;
+    color: white;
+}
+
+input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.robot-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.robot-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 200px;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+}
+
+.robot-card:hover {
+    transform: translateY(-5px);
+}
+
+.robot-card img {
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.robot-card h3 {
+    margin: 10px 0 5px;
+}
+
+.robot-card p {
+    margin: 5px 0;
+}
+</style>
+</head>
+<body>
+    <header>
+        <h1>Robo-Friends</h1>
+        <input type="text" id="search-box" placeholder="Search robots...">
+    </header>
+    <main>
+        <div id="robot-container" class="robot-container"></div>
+    </main>
+
+<script>
+
+const robots = [
+    { id: 1, name: "Robo TV", email: "tvrobo@mail.nets" },
+    { id: 2, name: "Robo Jane Smith", email: "jane.smith@net.com" },
+    { id: 3, name: "Nicholas Cage The Robot", email: "nic.cage@robo.com" },
+    { id: 4, name: "Robot Jox", email: "joxxx@netz.com" },
+    { id: 5, name: "Robo Johnson", email: "robo.johnson@rmail.net" },
+    { id: 6, name: "Bob The Robot", email: "bob@robo.com" },
+    { id: 7, name: "Bluebot", email: "blue@robogay.io" },
+    { id: 8, name: "Robot 999", email: "999@robo.net" }
+];
+
+function createRobotCard(robot) {
+    const card = document.createElement('div');
+    card.className = 'robot-card';
+    
+    const img = document.createElement('img');
+    img.src = `${robot.id}.png?size=200x200`;
+    img.alt = `${robot.name} image`;
+    
+    const name = document.createElement('h3');
+    name.textContent = robot.name;
+    
+    const email = document.createElement('p');
+    email.textContent = robot.email;
+    
+    card.appendChild(img);
+    card.appendChild(name);
+    card.appendChild(email);
+    
+    return card;
+}
+
+function displayRobots(robots) {
+    const container = document.getElementById('robot-container');
+    container.innerHTML = ''; 
+    
+    robots.forEach(robot => {
+        const card = createRobotCard(robot);
+        container.appendChild(card);
+    });
+}
+
+function filterRobots(searchTerm) {
+    return robots.filter(robot => 
+        robot.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+}
+
+displayRobots(robots);
+
+
+document.getElementById('search-box').addEventListener('input', (event) => {
+    const searchTerm = event.target.value;
+    const filteredRobots = filterRobots(searchTerm);
+    displayRobots(filteredRobots);
+});
+</script>
+</body>
+</html>
