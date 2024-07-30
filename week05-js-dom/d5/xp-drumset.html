@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini drum machine</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+.drum-machine {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+}
+
+.drum-button {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.drum-button:hover {
+    background-color: #aaa;
+}
+</style>
+</head>
+<body>
+    <div class="drum-machine">
+        <div class="drum-button" data-sound="https://github.com/devtlv/drumset_setup/raw/master/sounds/kick.wav">Kick</div>
+        <div class="drum-button" data-sound="https://github.com/devtlv/drumset_setup/raw/master/sounds/snare.wav">Snare</div>
+        <div class="drum-button" data-sound="https://github.com/devtlv/drumset_setup/raw/master/sounds/hihat.wav">Hi-Hat</div>
+        <div class="drum-button" data-sound="https://github.com/devtlv/drumset_setup/raw/master/sounds/tom.wav">Tom</div>
+        <div class="drum-button" data-sound="https://github.com/devtlv/drumset_setup/raw/master/sounds/openhat.wav">Open Hat</div>
+        <div class="drum-button" data-sound="https://github.com/devtlv/drumset_setup/raw/master/sounds/ride.wav">Ride</div>
+        <div class="drum-button" data-sound="https://github.com/devtlv/drumset_setup/raw/master/sounds/tink.wav">Tink</div>
+        <div class="drum-button" data-sound="https://github.com/devtlv/drumset_setup/raw/master/sounds/clap.wav">Clap</div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const drumButtons = document.querySelectorAll('.drum-button');
+
+    drumButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const soundUrl = button.getAttribute('data-sound');
+            playSound(soundUrl);
+        });
+    });
+
+    function playSound(url) {
+        const audio = new Audio(url);
+        audio.play();
+    }
+});
+</script>
+</body>
+</html>

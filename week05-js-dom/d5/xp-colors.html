@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coloring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #color-palette {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .color-box {
+            width: 30px;
+            height: 30px;
+            padding: 10px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            margin: 2px;
+        }
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(120, 15px);
+            grid-template-rows: repeat(40, 15px);
+            gap: 1px;
+            border: 1px solid #ddd;
+        }
+        .grid-cell {
+            width: 15px;
+            height: 15px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        #clear-button {
+            margin-bottom: 10px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }        
+    </style>
+</head>
+<body>
+
+<h1>Coloring game</h1>
+    
+<div id="color-palette"></div>
+   
+<button id="clear-button">Clear</button>
+    
+<div id="grid"></div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const Colors = [
+        '#FF5733', '#33FF57', '#3357FF', '#F0FF33', '#FF33A1', 
+        '#33FFF3', '#F3FF33', '#FF7F33', '#7F33FF', '#33FF7F', 
+        '#FF33F4', '#33F4FF'
+    ];
+
+    const gridSize = { rows: 40, cols: 120 };
+
+    const colorPalette = document.getElementById('color-palette');
+    const grid = document.getElementById('grid');
+    const clearButton = document.getElementById('clear-button');
+    
+    let selectedColor = '#000000'; 
+
+    Colors.forEach(color => {
+        const colorBox = document.createElement('div');
+        colorBox.className = 'color-box';
+        colorBox.style.backgroundColor = color;
+        colorBox.addEventListener('click', () => {
+            selectedColor = color;
+        });
+        colorPalette.appendChild(colorBox);
+    });
+
+    const cells = [];
+
+    for (let i = 0; i < gridSize.rows * gridSize.cols; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'grid-cell';
+        cell.addEventListener('mousemove', (event) => {
+            if (event.buttons === 1) { 
+                cell.style.backgroundColor = selectedColor;
+            }
+        });
+        grid.appendChild(cell);
+        cells.push(cell);
+    }
+
+    clearButton.addEventListener('click', () => {
+        cells.forEach(cell => {
+            cell.style.backgroundColor = '#fff';
+        });
+    });
+});
+</script>
+</body>
+</html>
