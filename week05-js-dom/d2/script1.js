@@ -7,7 +7,6 @@ let frac = 7.44654;
 console.log(frac.toFixed());
 
 
-//
 
 let bool2 = false;
 let checkBool = Boolean(bool2);
