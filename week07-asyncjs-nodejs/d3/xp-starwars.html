@@ -1,0 +1,151 @@
+<!-- Star Wars Web App Using AJAX API
+In this project you will have to build a single page application that uses AJAX to retrieve information and display it on your website as follows:
+Here is a demo.
+
+You should use this API: https://www.swapi.tech/ to get the data and update it “randomly” in your website by clicking a button.
+Note: The API contains 83 different characters
+
+Create your HTML file, and add the relevant elements.
+
+In your JS file, create your functions :
+to retrieve the elements from the DOM.
+to get the data from the API (star wars characters).
+to display the info on the DOM: the name, height, gender, birth year, and home world of the character.
+
+Display the data using AJAX. Make sure to display a loading message as follows:
+You can use any of these animation icons for the loading message.
+Fontawesome link :
+https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css
+If there is an error getting the data, display a message as follows:
+You can use your own css to style the website as you see fit -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star Wars Character Info</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #000;
+}
+
+.container {
+    text-align: center;
+    background: #252525;
+    color: cyan;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    h1 {
+        color: gold;
+        text-transform: uppercase;
+        font-size: 5em;
+    }
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: gold;
+    color: black;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    opacity: .8
+}
+
+.hidden {
+    display: none;
+}
+
+#error {
+    color: red;
+    font-weight: bold;
+}
+
+#loading {
+    font-size: 18px;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>StarWars</h1>
+        <button id="fetchCharacter">Get Random Character</button>
+        <div id="loading" class="hidden">
+            <i class="fas fa-spinner fa-spin"></i> Loading...
+        </div>
+        <div id="error" class="hidden">Error fetching data. Please try again.</div>
+        <div id="characterInfo" class="hidden">
+            <p><strong>Name:</strong> <span id="name"></span></p>
+            <p><strong>Height:</strong> <span id="height"></span></p>
+            <p><strong>Gender:</strong> <span id="gender"></span></p>
+            <p><strong>Birth Year:</strong> <span id="birthYear"></span></p>
+            <p><strong>Home World:</strong> <span id="homeWorld"></span></p>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const fetchButton = document.getElementById('fetchCharacter');
+    const loadingDiv = document.getElementById('loading');
+    const errorDiv = document.getElementById('error');
+    const characterInfoDiv = document.getElementById('characterInfo');
+    
+    const nameSpan = document.getElementById('name');
+    const heightSpan = document.getElementById('height');
+    const genderSpan = document.getElementById('gender');
+    const birthYearSpan = document.getElementById('birthYear');
+    const homeWorldSpan = document.getElementById('homeWorld');
+
+    fetchButton.addEventListener('click', () => {
+        loadingDiv.classList.remove('hidden');
+        errorDiv.classList.add('hidden');
+        characterInfoDiv.classList.add('hidden');
+        
+        const randomId = Math.floor(Math.random() * 83) + 1;
+        const url = `https://swapi.dev/api/people/${randomId}/`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                loadingDiv.classList.add('hidden');
+                characterInfoDiv.classList.remove('hidden');
+                
+                nameSpan.textContent = data.name;
+                heightSpan.textContent = data.height;
+                genderSpan.textContent = data.gender;
+                birthYearSpan.textContent = data.birth_year;
+                
+                // Fetch home world information
+                return fetch(data.homeworld);
+            })
+            .then(response => response.json())
+            .then(data => {
+                homeWorldSpan.textContent = data.name;
+            })
+            .catch(error => {
+                loadingDiv.classList.add('hidden');
+                errorDiv.classList.remove('hidden');
+                console.error('Error:', error);
+            });
+    });
+});
+
+</script>
+</body>
+</html>

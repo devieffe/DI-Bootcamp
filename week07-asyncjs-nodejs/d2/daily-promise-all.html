@@ -1,0 +1,75 @@
+<!-- // You will find the hour of sunrise of two cities, using the API https://sunrise-sunset.org/api.
+// In the HTML file, create a form with 4 inputs:
+// the latitude and longitude of the first city
+// the latitude and longitude of the second city
+// Retrieve the input’s value and display the hour of the sunrise for both city ONLY when both promises are resolved
+// Hint : Use Promise.all()
+// Try with Paris and New York
+// Paris
+// Latitude: 48.864716
+// Longitude: 2.349014
+// New York
+// Latitude: 40.730610
+// Longitude: -73.935242 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise Time Finder</title>
+</head>
+<body>
+    <h1>Sunrise Time Finder</h1>
+    <form id="locationForm">
+        <div>
+            <h3>City 1</h3>
+            <label for="latitude1">Latitude:</label>
+            <input type="text" id="latitude1" name="latitude1" required>
+            <label for="longitude1">Longitude:</label>
+            <input type="text" id="longitude1" name="longitude1" required>
+        </div>
+        <div>
+            <h3>City 2</h3>
+            <label for="latitude2">Latitude:</label>
+            <input type="text" id="latitude2" name="latitude2" required>
+            <label for="longitude2">Longitude:</label>
+            <input type="text" id="longitude2" name="longitude2" required>
+        </div>
+        <button type="submit">Get Sunrise Times</button>
+    </form>
+    <div id="result"></div>
+
+    
+<script>
+document.getElementById('locationForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const latitude1 = document.getElementById('latitude1').value;
+    const longitude1 = document.getElementById('longitude1').value;
+    const latitude2 = document.getElementById('latitude2').value;
+    const longitude2 = document.getElementById('longitude2').value;
+
+    // Define URLs for the API requests
+    const url1 = `https://api.sunrise-sunset.org/json?lat=${latitude1}&lng=${longitude1}&formatted=0`;
+    const url2 = `https://api.sunrise-sunset.org/json?lat=${latitude2}&lng=${longitude2}&formatted=0`;
+
+    // Fetch sunrise times for both cities using Promise.all
+    Promise.all([fetch(url1), fetch(url2)])
+        .then(responses => Promise.all(responses.map(response => response.json())))
+        .then(data => {
+            const sunriseCity1 = new Date(data[0].results.sunrise).toLocaleTimeString('en-US', { timeZone: 'UTC' });
+            const sunriseCity2 = new Date(data[1].results.sunrise).toLocaleTimeString('en-US', { timeZone: 'UTC' });
+
+            // Display the results
+            document.getElementById('result').innerHTML = `
+                <h3>Sunrise Times</h3>
+                <p>City 1: ${sunriseCity1}</p>
+                <p>City 2: ${sunriseCity2}</p>
+            `;
+        })
+        .catch(error => console.error('Error fetching sunrise data:', error));
+});
+</script>
+</body>
+</html>

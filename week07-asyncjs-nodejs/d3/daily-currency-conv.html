@@ -1,0 +1,148 @@
+<!-- You will create a currencies converter:
+
+In this application we’re going receive data from two asynchronous sources.
+
+You will use :
+
+This documentation
+Create your own API key by signing up - you will be able to make more requests :)
+
+
+Note
+The program should take the currency which the user currently has and the currency in which they would like to receive, as well as the amount of money. Afterwards, the program will output the correct exchange rate based on the data from the APIs.
+
+First, you need to fetch all the supported currencies, in order to add the currencies options (ie FROM - To) in the currency converter. Check out this page on Supported Codes Endpoint from the ExchangeRate API documentation.
+
+To convert from a currency, to another one, you need to fetch conversion rate from the Pair Conversion API endpoint. Check out this page on Pair conversion requests from the ExchangeRate API documentation.
+Hint: You could also supply an optional AMOUNT variable in the query of the request.
+
+Bonus: Add this “switch” button on the page, when clicked on it will switch the currencies and display the new amount converted.
+Example : if the conversion was from EUR to GBP, as soon as the button is clicked on, the conversion should be from GBP to EUR.
+
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .converter {
+            border: 1px solid #ccc;
+            padding: 50px;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+        button {
+            margin-top: 10px;
+        }
+        .switch {
+            margin: 10px 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="converter">
+        <h1>Currency converter</h1>
+        <div>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" value="1" min="0">
+        </div>
+        <div>
+            <label for="fromCurrency">From:</label>
+            <select id="fromCurrency"></select>
+        </div>
+        <div>
+            <label for="toCurrency">To:</label>
+            <select id="toCurrency"></select>
+        </div>
+        <div class="switch">⇆ Switch</div>
+        <button id="convertButton">Convert</button>
+        <div id="result"></div>
+    </div>
+
+
+<script>
+    
+const apiKey = 'e548433eaf971d23a141eec6';  
+const apiBaseUrl = 'https://v6.exchangerate-api.com/v6/';
+
+const fromQ = document.getElementById('fromCurrency');
+const toQ = document.getElementById('toCurrency');
+const amountQ = document.getElementById('amount');
+const resultDiv = document.getElementById('result');
+const switchButton = document.querySelector('.switch');
+
+
+async function fetchQ() {
+    try {
+        const response = await fetch(`${apiBaseUrl}${apiKey}/codes`);
+        const data = await response.json();
+        const currencyCodes = data.supported_codes;
+
+        currencyCodes.forEach(code => {
+            const option1 = document.createElement('option');
+            option1.value = code[0];
+            option1.text = `${code[1]} (${code[0]})`;
+            fromCurrency.add(option1);
+
+            const option2 = document.createElement('option');
+            option2.value = code[0];
+            option2.text = `${code[1]} (${code[0]})`;
+            toCurrency.add(option2);
+        });
+
+        fromQ.value = 'USD';
+        toQ.value = 'EUR';
+
+    } catch (error) {
+        console.error('Error fetching currencies: ', error);
+    }
+}
+
+async function convertQ() {
+    const from = fromQ.value;
+    const to = toQ.value;
+    const amount = parseFloat(amountQ.value);
+
+    try {
+        const response = await fetch(`${apiBaseUrl}${apiKey}/pair/${from}/${to}/${amount}`);
+        const data = await response.json();
+
+        if (data.conversion_result) {
+            resultDiv.textContent = `${amount} ${from} = ${data.conversion_result.toFixed(2)} ${to}`;
+        } else {
+            resultDiv.textContent = 'Error fetching conversion rate';
+        }
+    } catch (error) {
+        console.error('Error converting currency: ', error);
+    }
+}
+
+function switchQ() {
+    const fromValue = fromQ.value;
+    fromQ.value = toQ.value;
+    toQ.value = fromValue;
+    convertQ();
+}
+
+
+document.getElementById('convertButton').addEventListener('click', convertQ);
+switchButton.addEventListener('click', switchQ);
+
+fetchQ();
+
+</script>
+</body>
+</html>
