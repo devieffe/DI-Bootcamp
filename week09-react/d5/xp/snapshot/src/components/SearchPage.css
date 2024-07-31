@@ -1,0 +1,32 @@
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .image-card {
+    margin: 1rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .image-card img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .image-card img:hover {
+    transform: scale(1.1);
+  }
+  
+  .pagination {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .pagination button {
+    margin: 0 0.5rem;
+  }
+  
