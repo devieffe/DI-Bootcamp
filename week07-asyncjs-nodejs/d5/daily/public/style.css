@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  #emoji {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    margin: 30px;
+    background: #fff;
+    border-radius: 10px;
+    display: inline-block;
+    min-width: 420px;
+    padding: 20px;
+  }
+  
+  #options {
+    margin-bottom: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+  
+  #feedback {
+    margin-top: 20px;
+    font-size: 1.2rem;
+  }
+  
