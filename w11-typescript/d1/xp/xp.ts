@@ -4,7 +4,7 @@
 // Description: Create a simple “Hello, World!” program in TypeScript.
 // Create a TypeScript program that logs the message “Hello, World!” to the console.
 
-console.log("Hello, World!");
+console.log('hello world');
 
 
 // 🌟 Exercise 2: Type Annotations
@@ -181,7 +181,7 @@ console.log(`The action for ${userRole} is ${action}.`);
 // Create an overloaded function greet that can either take a name and greet the person, or take no arguments and return a default greeting.
 
 function greets(name: string): string;
-function greets(): string;
+// function greets(): string;
 
 function greets(name?: string): string {
     if (name) {

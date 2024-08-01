@@ -19,7 +19,6 @@ function processInput(input: number | string | boolean): number | string | boole
     }
   }
 
-  console.log(processInput(15));         
-  console.log(processInput('hello'));  
-  console.log(processInput(true));   
-  
+console.log(processInput(15));         
+console.log(processInput('hello'));  
+console.log(processInput(true));   

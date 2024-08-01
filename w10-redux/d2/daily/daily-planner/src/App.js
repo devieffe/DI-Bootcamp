@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import DatePicker from "./DatePicker";
-import TaskForm from "./TaskForm";
-import ConnectedTaskList from "./TaskList";
+// import TaskForm from "./TaskForm";
+// import ConnectedTaskList from "./TaskList";
 
 function App() {
   const [selectedDay, setSelectedDay] = useState("2024-08-01");
