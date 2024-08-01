@@ -6,9 +6,9 @@
 //Make sure to check the status of the Response and to catch any occuring errors.
 
 
-const apiUrl = 'https://api.giphy.com/v1/gifs/search?q=hilarious&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My';
+const apiUrl1 = "https://api.giphy.com/v1/gifs/search?q=hilarious&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My";
 
-fetch(apiUrl)
+fetch(apiUrl1)
   .then(response => {
     if (!response.ok) {
       throw new Error(`HTTP error: ${response.status}`);
@@ -29,9 +29,9 @@ fetch(apiUrl)
 //Make sure to check the status of the Response and to catch any occuring errors.
 //Console.log the Javascript Object that you receive.
 
-const apiUrl = 'https://api.giphy.com/v1/gifs/search?q=sun&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My&limit=10&offset=2';
+const apiUrl2 = 'https://api.giphy.com/v1/gifs/search?q=sun&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My&limit=10&offset=2';
 
-fetch(apiUrl)
+fetch(apiUrl2)
   .then(response => {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);

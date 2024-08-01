@@ -202,7 +202,7 @@ console.log(kgToGramsArrow(5));
 // The function should add a div in the nabvar, displaying the name of the 
 // user and his profile picture.
 
-
+{/*
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -223,7 +223,7 @@ console.log(kgToGramsArrow(5));
 </script>
 </body>
 </html>
-
+*/}
 
 
 
