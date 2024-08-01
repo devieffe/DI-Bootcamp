@@ -1,14 +1,19 @@
 const express = require('express');
 const app = express();
-const port = 3001;
+const PORT = 3000;
 
 app.use(express.json());
 
+// Import and use the todos router
 const todosRouter = require('./routes/todos');
-
 app.use('/todos', todosRouter);
 
+// Define a route for the root path
+app.get('/', (req, res) => {
+  res.send('To-Do List API');
+});
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}/`);
+// Start the server
+app.listen(PORT, () => {
+  console.log(`OK: http://localhost:${PORT}`);
 });

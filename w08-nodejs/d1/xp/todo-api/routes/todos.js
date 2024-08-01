@@ -1,50 +1,52 @@
 const express = require('express');
 const router = express.Router();
 
-// Sample
-let todos = [];
-let nextId = 1;
 
-// Get all
+const todos = [
+  { id: '1', task: 'Learn express.js', completed: false },
+  { id: '2', task: 'Build a To-Do List app', completed: true },
+  { id: '3', task: 'Deploy application', completed: false }
+];
+
+// Get all to-do items
 router.get('/', (req, res) => {
   res.json(todos);
 });
 
-// Add 
+// Add a new to-do item
 router.post('/', (req, res) => {
-  const { title, description } = req.body;
-  if (!title || !description) {
-    return res.status(400).json({ error: 'Title and description are required' });
+  const { id, task } = req.body;
+  if (id && task) {
+    todos.push({ id, task });
+    res.status(201).json({ id, task });
+  } else {
+    res.status(400).json({ error: 'Invalid input' });
   }
-  const newTodo = { id: nextId++, title, description, completed: false };
-  todos.push(newTodo);
-  res.status(201).json(newTodo);
 });
 
-// Update
+// Update a to-do item by ID
 router.put('/:id', (req, res) => {
   const { id } = req.params;
-  const { title, description, completed } = req.body;
-  const todo = todos.find(todo => todo.id === parseInt(id));
-  if (!todo) {
-    return res.status(404).json({ error: 'To-do item not found' });
+  const { task } = req.body;
+  const todo = todos.find(t => t.id === id);
+  if (todo) {
+    todo.task = task;
+    res.json(todo);
+  } else {
+    res.status(404).json({ error: 'To-do not found' });
   }
-  if (title) todo.title = title;
-  if (description) todo.description = description;
-  if (completed !== undefined) todo.completed = completed;
-  res.json(todo);
 });
 
-
+// Delete a to-do item by ID
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-  const index = todos.findIndex(todo => todo.id === parseInt(id));
-  if (index === -1) {
-    return res.status(404).json({ error: 'To-do item not found' });
+  const index = todos.findIndex(t => t.id === id);
+  if (index !== -1) {
+    todos.splice(index, 1);
+    res.status(204).end();
+  } else {
+    res.status(404).json({ error: 'To-do not found' });
   }
-  todos.splice(index, 1);
-  res.status(204).send();
 });
-
 
 module.exports = router;

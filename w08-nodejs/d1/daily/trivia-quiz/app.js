@@ -1,23 +1,19 @@
 const express = require('express');
-const session = require('express-session');
-const bodyParser = require('body-parser');
-const quizRouter = require('./routes/quiz');
-
 const app = express();
+const port = 3000;
 
+app.use(express.json());
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  session({
-    secret: 'trivia_secret_key', 
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+// root path
+app.get('/', (req, res) => {
+  res.send('Trivia quiz');
+});
 
+// Import and use the quiz router
+const quizRouter = require('./routes/quiz');
 app.use('/quiz', quizRouter);
 
-const PORT = 3005;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+// Start server
+app.listen(port, () => {
+  console.log(`OK http://localhost:${port}/`);
 });
