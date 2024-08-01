@@ -1,70 +1,64 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ex3: Implement A Todo List
+Objective: Create a React component that allows users to add and remove todo items using useReducer.
+Set up a new React project using create-react-app or your preferred method.
+Create a component that includes an input field for adding todos, a list to display todos, and a way to remove todos.
+Use the useReducer hook to manage the state of the todo list.
+Implement actions for adding and removing todos in your reducer.
+Hints:
+You can represent each todo as an object with properties like id and text.
+Use a unique id for each todo to identify them when removing.
+Example Starter Code:
+Here’s a simplified example to get you started:
+import React, { useReducer, useState } from "react";
+// Reducer function
+function todoReducer(state, action) {
+  switch (action.type) {
+    case "ADD_TODO":
+      // Add a new todo to the state
+      return [...state, { id: Date.now(), text: action.text }];
+    case "REMOVE_TODO":
+      // Remove a todo by its id
+      return state.filter((todo) => todo.id !== action.id);
+    default:
+      return state;
+  }
+}
+function TodoList() {
+  const [todos, dispatch] = useReducer(todoReducer, []);
+  const [todoText, setTodoText] = useState("");
+  const handleAddTodo = () => {
+    if (todoText.trim() === "") return;
+    dispatch({ type: "ADD_TODO", text: todoText });
+    setTodoText("");
+  };
+  const handleRemoveTodo = (id) => {
+    dispatch({ type: "REMOVE_TODO", id });
+  };
+  return (
+    <div>
+      <h1>Todo List</h1>
+      <input
+        type="text"
+        placeholder="Add a new todo"
+        value={todoText}
+        onChange={(e) => setTodoText(e.target.value)}
+      />
+      <button onClick={handleAddTodo}>Add Todo</button>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.text}
+            <button onClick={() => handleRemoveTodo(todo.id)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+function App() {
+  return (
+    <div className="App">
+      <TodoList />
+    </div>
+  );
+}
