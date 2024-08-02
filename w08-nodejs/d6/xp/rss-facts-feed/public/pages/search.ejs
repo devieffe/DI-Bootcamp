@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/head.ejs') %>
+<body>
+  <%- include('../partials/header.ejs') %>
+  <div class="container mt-4">
+    <h3>Search Posts</h3>
+    <form action="/search/title" method="POST" class="mb-4">
+      <div class="form-group">
+        <label for="title">Search by Title:</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <form action="/search/category" method="POST" class="mb-4">
+      <div class="form-group">
+        <label for="category">Search by Category:</label>
+        <input type="text" class="form-control" id="category" name="category" placeholder="Enter category" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    <%- include('../partials/posts.ejs') %>
+  </div>
+  <%- include('../partials/footer.ejs') %>
+</body>
+</html>
