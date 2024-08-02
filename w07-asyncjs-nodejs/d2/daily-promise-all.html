@@ -40,7 +40,7 @@
     </form>
     <div id="result"></div>
 
-    
+
 <script>
 document.getElementById('locationForm').addEventListener('submit', function (event) {
     event.preventDefault();
@@ -50,18 +50,15 @@ document.getElementById('locationForm').addEventListener('submit', function (eve
     const latitude2 = document.getElementById('latitude2').value;
     const longitude2 = document.getElementById('longitude2').value;
 
-    // Define URLs for the API requests
     const url1 = `https://api.sunrise-sunset.org/json?lat=${latitude1}&lng=${longitude1}&formatted=0`;
     const url2 = `https://api.sunrise-sunset.org/json?lat=${latitude2}&lng=${longitude2}&formatted=0`;
 
-    // Fetch sunrise times for both cities using Promise.all
     Promise.all([fetch(url1), fetch(url2)])
         .then(responses => Promise.all(responses.map(response => response.json())))
         .then(data => {
             const sunriseCity1 = new Date(data[0].results.sunrise).toLocaleTimeString('en-US', { timeZone: 'UTC' });
             const sunriseCity2 = new Date(data[1].results.sunrise).toLocaleTimeString('en-US', { timeZone: 'UTC' });
 
-            // Display the results
             document.getElementById('result').innerHTML = `
                 <h3>Sunrise Times</h3>
                 <p>City 1: ${sunriseCity1}</p>
