@@ -1,5 +1,5 @@
 #classes
-S
+
 class Dog:
 
     def __init__(self, name, color, age=0):
